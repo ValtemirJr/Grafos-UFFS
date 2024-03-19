@@ -13,6 +13,11 @@ public:
     int num_arestas();
 
     bool tem_aresta(Aresta e);
+    bool valida_aresta(Aresta e);
+    void testa_aresta(Aresta e);
+    bool atualizar_aresta(Aresta e, int num);
+    void colocar_aresta(Aresta e);
+    void retirar_aresta(Aresta e);
 private:
     std::vector<std::vector<int>> matriz_adj_;
     int num_vertices_;

@@ -25,12 +25,53 @@ int Grafo::num_arestas() {
     return num_arestas_;
 }
 
-bool Grafo::tem_aresta(Aresta aresta){
-    if(aresta.v1 > num_vertices_ || aresta.v2 > num_vertices_){
-        throw(invalid_argument("Aresta Inválida!"));
+bool Grafo::valida_aresta(Aresta e){
+    if(e.v1 > num_vertices_ || e.v2 > num_vertices_){
+        return false;
     }
+    return true;
+}
 
-    if(matriz_adj_[aresta.v1][aresta.v2] = 1)
+void Grafo::testa_aresta(Aresta e){
+    if(!valida_aresta(e))
+        throw(invalid_argument("Arasta invalida!"));
+    return;
+}
+
+bool Grafo::tem_aresta(Aresta e){
+    testa_aresta(e);
+
+    if(matriz_adj_[e.v1][e.v2] = 1)
         return true;
     return false;
+}
+
+bool Grafo::atualizar_aresta(Aresta e, int num){
+    testa_aresta(e);
+
+    if(matriz_adj_[e.v1][e.v2] = num)
+        return false;
+
+    matriz_adj_[e.v1][e.v2] = num;    
+    return true;
+}
+
+void Grafo::colocar_aresta(Aresta e){
+    if(atualizar_aresta(e, 1)){
+        cout << "Aresta inserida com sucesso!";
+        return;
+    }
+    else{
+        cout << "Não foi possivel";
+    }
+}
+
+void Grafo::retirar_aresta(Aresta e){
+    if(atualizar_aresta(e, 0)){
+        cout << "Aresta retirada com sucesso!";
+        return;
+    }
+    else{
+        cout << "Não foi possivel";
+    }
 }
