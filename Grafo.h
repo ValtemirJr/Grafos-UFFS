@@ -18,6 +18,8 @@ public:
     bool atualizar_aresta(Aresta e, int num);
     void colocar_aresta(Aresta e);
     void retirar_aresta(Aresta e);
+    void imprimir_vizinhos(Aresta e);
+    void imprimir_grafo();
 private:
     std::vector<std::vector<int>> matriz_adj_;
     int num_vertices_;

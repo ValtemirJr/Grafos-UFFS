@@ -49,16 +49,17 @@ bool Grafo::tem_aresta(Aresta e){
 bool Grafo::atualizar_aresta(Aresta e, int num){
     testa_aresta(e);
 
-    if(matriz_adj_[e.v1][e.v2] = num)
+    if(matriz_adj_[e.v1][e.v2] = num && matriz_adj_[e.v2][e.v1])
         return false;
 
-    matriz_adj_[e.v1][e.v2] = num;    
+    matriz_adj_[e.v1][e.v2] = num;
+    matriz_adj_[e.v2][e.v1] = num;    
     return true;
 }
 
 void Grafo::colocar_aresta(Aresta e){
     if(atualizar_aresta(e, 1)){
-        cout << "Aresta inserida com sucesso!";
+        cout << "Aresta inserida com sucesso!" << endl;
         return;
     }
     else{
@@ -68,10 +69,32 @@ void Grafo::colocar_aresta(Aresta e){
 
 void Grafo::retirar_aresta(Aresta e){
     if(atualizar_aresta(e, 0)){
-        cout << "Aresta retirada com sucesso!";
+        cout << "Aresta retirada com sucesso!" << endl;
         return;
     }
     else{
         cout << "Não foi possivel";
+    }
+}
+
+void Grafo::imprimir_vizinhos(Aresta e) {
+    testa_aresta(e);
+
+    int vertice = e.v1;
+
+    for (int i = 0; i < num_vertices_; i++) {
+        if (matriz_adj_[vertice][i] == 1) {
+            cout << "(" << vertice << "," << i << ")" << " ";
+        }
+    }
+    cout << endl;
+}
+
+void  Grafo::imprimir_grafo(){
+    for (size_t i = 0; i < matriz_adj_.size(); ++i) {
+        for (size_t j = 0; j < matriz_adj_[i].size(); ++j) {
+            cout << matriz_adj_[i][j] << " ";
+        }
+        cout << endl;
     }
 }
