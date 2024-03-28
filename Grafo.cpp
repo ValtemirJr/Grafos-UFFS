@@ -49,7 +49,7 @@ bool Grafo::tem_aresta(Aresta e){
 bool Grafo::atualizar_aresta(Aresta e, int num){
     testa_aresta(e);
 
-    if(matriz_adj_[e.v1][e.v2] = num && matriz_adj_[e.v2][e.v1])
+    if(matriz_adj_[e.v1][e.v2] == num)
         return false;
 
     matriz_adj_[e.v1][e.v2] = num;
@@ -59,6 +59,7 @@ bool Grafo::atualizar_aresta(Aresta e, int num){
 
 void Grafo::colocar_aresta(Aresta e){
     if(atualizar_aresta(e, 1)){
+        num_arestas_ += 1;
         cout << "Aresta inserida com sucesso!" << endl;
         return;
     }
@@ -69,6 +70,7 @@ void Grafo::colocar_aresta(Aresta e){
 
 void Grafo::retirar_aresta(Aresta e){
     if(atualizar_aresta(e, 0)){
+        num_arestas_ -= 1;
         cout << "Aresta retirada com sucesso!" << endl;
         return;
     }
@@ -77,17 +79,16 @@ void Grafo::retirar_aresta(Aresta e){
     }
 }
 
-void Grafo::imprimir_vizinhos(Aresta e) {
-    testa_aresta(e);
-
-    int vertice = e.v1;
-
+void Grafo::imprimir_vizinhos() {
     for (int i = 0; i < num_vertices_; i++) {
-        if (matriz_adj_[vertice][i] == 1) {
-            cout << "(" << vertice << "," << i << ")" << " ";
+        cout << i << ":";
+        for(int j = 0; j < num_vertices_; j++){
+            if(matriz_adj_[i][j] != 0){
+                cout << " " << j;
+            }
         }
+        cout << endl;
     }
-    cout << endl;
 }
 
 void  Grafo::imprimir_grafo(){
