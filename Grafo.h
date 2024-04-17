@@ -7,23 +7,32 @@
 
 class Grafo {
 public:
+    /** Constroi um grafo simples que possui o numero de vertices recebido por
+     *  parametro e que nao possui arestas */
     Grafo(int num_vertices);
-    
+
     int num_vertices();
     int num_arestas();
 
-    bool tem_aresta(Aresta e);
-    bool valida_aresta(Aresta e);
-    void testa_aresta(Aresta e);
-    bool atualizar_aresta(Aresta e, int num);
-    void colocar_aresta(Aresta e);
-    void retirar_aresta(Aresta e);
-    void imprimir_vizinhos();
-    void imprimir_grafo();
+    /** Insere uma aresta no grafo caso a aresta ainda nao exista no grafo e
+     * nao seja um laco */
+    void insere_aresta(Aresta e);
+
+    /** Remove uma aresta do grafo caso a aresta exista no grafo */
+    void remove_aresta(Aresta e);
+    bool ehConexo();
+    int quantideComponentes();
+    void busca_em_profudindade(int v, std::vector<int> &marcados);
+
+    void imprime();
 private:
-    std::vector<std::vector<int>> matriz_adj_;
     int num_vertices_;
     int num_arestas_;
+    std::vector<std::vector<int>> matriz_adj_;
+    bool _ehConexo(std::vector<int> &marcados, int num);
+
+    void valida_vertice(int v);
+    void valida_aresta(Aresta e);
 };
 
 #endif /* GRAFO_H */
